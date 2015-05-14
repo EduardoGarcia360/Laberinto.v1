@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
@@ -15,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
 import java.applet.AudioClip;
+
+import javax.swing.JTextField;
 
 public class Tema_201212961 extends JFrame implements ActionListener {
 
@@ -39,6 +42,8 @@ public class Tema_201212961 extends JFrame implements ActionListener {
 	public static boolean S_flash=false, S_sonic=false, S_zelda=false, S_pacman=false;
 	public static boolean S_lab1=false, S_lab2=false, S_lab3=false, S_lab4=false;
 	public static boolean S_indi=false, S_vspc=false, S_facil=false, S_medio=false, S_dificil=false;
+	private JLabel lblTuNombre;
+	public static JTextField txtNombreusuario;
 	//
 	
 
@@ -83,8 +88,13 @@ public class Tema_201212961 extends JFrame implements ActionListener {
 		btnRegresarAlMenu.setIcon(regresar);
 		btnRegresarAlMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				main_201212961.m.setVisible(true);
+				if( txtNombreusuario.getText().equals("") ){
+					JOptionPane.showMessageDialog(null, "Ingresa tu Nombre antes de regresar\nVerifica que hayas elegido las demas opciones");
+				}else{
+					setVisible(false);
+					main_201212961.m.setVisible(true);
+				}
+				
 			}
 		});
 		btnRegresarAlMenu.setBounds(544, 254, 89, 59);
@@ -207,12 +217,21 @@ public class Tema_201212961 extends JFrame implements ActionListener {
 		modo.add(rdbtnVsPc);
 		rdbtnVsPc.setBounds(836, 255, 109, 23);
 		contentPane.add(rdbtnVsPc);
+		
+		lblTuNombre = new JLabel("Tu Nombre:");
+		lblTuNombre.setBounds(760, 294, 81, 14);
+		contentPane.add(lblTuNombre);
+		
+		txtNombreusuario = new JTextField();
+		txtNombreusuario.setBounds(744, 319, 186, 23);
+		contentPane.add(txtNombreusuario);
+		txtNombreusuario.setColumns(10);
 	}
 	
 	public void actionPerformed(ActionEvent e){
 		if(rdbtnNum.isSelected()){
 			this.setTitle("Tema de Zelda elegido");
-			//SonidoZ.play();
+			SonidoZ.play();
 			SonidoF.stop(); SonidoS.stop(); SonidoP.stop();
 			S_zelda=true;
 			S_flash=false; S_sonic=false; S_pacman=false;
@@ -255,7 +274,8 @@ public class Tema_201212961 extends JFrame implements ActionListener {
 			S_lab1=false; S_lab2=false; S_lab3=false;
 		}
 		if(rdbtnIndividual.isSelected()){
-			S_indi=true; S_vspc=false;
+			S_indi=true; 
+			S_vspc=false;
 			
 		}
 		if(rdbtnVsPc.isSelected()){

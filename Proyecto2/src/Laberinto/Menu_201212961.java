@@ -30,6 +30,8 @@ public class Menu_201212961 extends JFrame {
 	public static Soluciones_201212961 sol;
 	//
 	JButton btnJuegoNuevo, btnVsPc, btnTema, btnDocumentacion, btnSalir, btnSolucion;
+	//
+	Ventana_201212961 v1;
 	
 	/**
 	 * Launch the application.
@@ -71,11 +73,11 @@ public class Menu_201212961 extends JFrame {
 		btnJuegoNuevo.setEnabled(true);	
 		btnJuegoNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(!Tema_201212961.S_indi){
+				if(Tema_201212961.S_indi = false){
 					JOptionPane.showMessageDialog(null, "Empieza por elegir el tema de juego\nhaz click en el boton Seleccionar Tema.");
 				}else{
 					setVisible(false);
-					Ventana_201212961 v1 = new Ventana_201212961();
+					v1 = new Ventana_201212961();
 					v1.setVisible(true);
 				}
 			}
