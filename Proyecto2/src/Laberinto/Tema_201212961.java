@@ -38,6 +38,7 @@ public class Tema_201212961 extends JFrame implements ActionListener {
 	//
 	public static boolean S_flash=false, S_sonic=false, S_zelda=false, S_pacman=false;
 	public static boolean S_lab1=false, S_lab2=false, S_lab3=false, S_lab4=false;
+	public static boolean S_indi=false, S_vspc=false, S_facil=false, S_medio=false, S_dificil=false;
 	//
 	
 
@@ -64,6 +65,7 @@ public class Tema_201212961 extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 980, 438);
 		this.setIconImage(icono);
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -251,6 +253,25 @@ public class Tema_201212961 extends JFrame implements ActionListener {
 		if(rdbtnLabe_3.isSelected()){
 			S_lab4=true;
 			S_lab1=false; S_lab2=false; S_lab3=false;
+		}
+		if(rdbtnIndividual.isSelected()){
+			S_indi=true; S_vspc=false;
+			
+		}
+		if(rdbtnVsPc.isSelected()){
+			S_vspc=true; S_indi=false;
+		}
+		if(rdbtnFacil.isSelected()){
+			S_facil=true;
+			S_medio=false; S_dificil=false;
+		}
+		if(rdbtnMedio.isSelected()){
+			S_medio=true;
+			S_facil=false; S_dificil=false;
+		}
+		if(rdbtnDificil.isSelected()){
+			S_dificil=true;
+			S_facil=false; S_medio=false;
 		}
 	}
 }

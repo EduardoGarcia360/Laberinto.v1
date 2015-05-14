@@ -1,6 +1,7 @@
 package Laberinto;
 
 import java.awt.EventQueue;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -20,6 +21,7 @@ public class Soluciones_201212961 extends JFrame {
 	JLabel lblImagen, lblLaberinto;
 	JButton btnSiguiente, btnAnterior, btnMenu;
 	ImageIcon regresar = new ImageIcon(getClass().getResource("/Imagenes/regresar.png"));
+	Image iconoF = new ImageIcon(this.getClass().getResource("/Iconos/solucion.png")).getImage();
 
 	/**
 	 * Launch the application.
@@ -43,6 +45,9 @@ public class Soluciones_201212961 extends JFrame {
 	public Soluciones_201212961() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 673, 601);
+		this.setIconImage(iconoF);
+		this.setTitle("Caminos mas cortos para salir del laberinto!");
+		this.setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,6 +81,7 @@ public class Soluciones_201212961 extends JFrame {
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				numero++;
+				lblLaberinto.setVisible(true);
 				lblLaberinto.setText("Laberinto #"+numero);
 				lblImagen.setIcon(null);
 				String ruta = "/Soluciones/indiv_labe_"+numero+".jpg";

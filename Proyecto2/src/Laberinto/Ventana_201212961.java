@@ -34,6 +34,7 @@ public class Ventana_201212961 extends JFrame implements KeyListener {
 	String DatosDeTema = vi.TemaSeleccionado();
 	String tiempo="";
 	Seguir s;
+	Hilo Cronometro;
 	Boolean hilo_seguir=false;
 	//PERSONAJES
 	ImageIcon Protagonista, Rival, Cofre, Pared, Fin;
@@ -56,8 +57,6 @@ public class Ventana_201212961 extends JFrame implements KeyListener {
 	Image fondo =  new ImageIcon(this.getClass().getResource(vi.Fondo())).getImage();
 	//
 	int PosX, PosY, cArriba, cAbajo, cDerecha, cIzquierda, cPasos, minuto, segundo, centesima, PX, PY, pX, pY;
-	//
-	Timer t;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -96,7 +95,7 @@ public class Ventana_201212961 extends JFrame implements KeyListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		Hilo Cronometro = new Hilo();
+		Cronometro = new Hilo();
 		s = new Seguir();
 		
 		
@@ -124,7 +123,6 @@ public class Ventana_201212961 extends JFrame implements KeyListener {
 				centesima++;
 				if(centesima == 100){
 					centesima=0; segundo++;
-					
 				}
 				if(segundo == 60){
 					segundo=0; minuto++;
@@ -143,17 +141,40 @@ public class Ventana_201212961 extends JFrame implements KeyListener {
 	private class Seguir extends Thread{
 		public void run(){
 			while(true){
-				laberinto[pX][pY].setIcon(null);
-				String [] Guia = cola.sacar().split(",");
-				PX = Integer.parseInt(Guia[0]);
-				PY = Integer.parseInt(Guia[1]);
-				laberinto[PX][PY].setIcon(Rival);
-				pX=PX; pY=PY;
-				try {
-					Thread.sleep(1000); //10 -> CENTESIMA, 1000 -> SEGUNDO
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				
+				if(cola.empty()){
+					Cronometro.stop();
+					JOptionPane.showMessageDialog(null, "El Villano te alcanzo!\nTiempo: " + tiempo + 
+							"\nPasos Dados: " + cPasos);
+					break;
+				}else{
+					laberinto[pX][pY].setIcon(null);
+					String [] Guia = cola.sacar().split(",");
+					PX = Integer.parseInt(Guia[0]);
+					PY = Integer.parseInt(Guia[1]);
+					laberinto[PX][PY].setIcon(Rival);
+					pX=PX; pY=PY;
+					if(Tema_201212961.S_facil){
+						try {
+							Thread.sleep(600); //10 -> CENTESIMA, 1000 -> SEGUNDO
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}else if(Tema_201212961.S_medio){
+						try {
+							Thread.sleep(400); //10 -> CENTESIMA, 1000 -> SEGUNDO
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}else if(Tema_201212961.S_dificil){
+						try {
+							Thread.sleep(200); //10 -> CENTESIMA, 1000 -> SEGUNDO
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
 				}
+				
 			}
 			
 		}
@@ -240,7 +261,7 @@ public class Ventana_201212961 extends JFrame implements KeyListener {
 		JButton btnIniciar = new JButton("Continuar");
 		btnIniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				t.start();
+				
 				btnIniciar.setSelected(false);
 			}
 		});
@@ -250,7 +271,7 @@ public class Ventana_201212961 extends JFrame implements KeyListener {
 		JButton btnPausar = new JButton("Pausa");
 		btnPausar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				t.stop();
+				
 				btnPausar.setSelected(false);
 			}
 		});

@@ -5,11 +5,19 @@ import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import java.awt.Desktop;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class Archivo_201212961 {
 	
 	FileReader fr=null;
 	BufferedReader br = null;
 	InputStream archivo, archivo_tema;
+	String head, nombredelarchivo;
 	
 	public String AbrirCSV(String NOMBRE, int LINEAS){
 		archivo=getClass().getResourceAsStream(NOMBRE+".csv");
@@ -47,6 +55,19 @@ public class Archivo_201212961 {
 		}catch(Exception e){}
 		return retorno;
 		
+	}
+	
+	public void CrearARCHIVO(){
+		File a;
+		FileWriter escritor;
+		
+		
+		head = "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n"
+		         +"<html xmlns=\"http://www.w3.org/1999/xhtml\">\n"
+		         +"<head>\n"
+		         +"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+		         +"<title>Resultados</title>\n"
+		         +"</head>";
 	}
 
 }
